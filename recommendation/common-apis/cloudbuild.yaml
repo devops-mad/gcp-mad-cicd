@@ -12,7 +12,7 @@ substitutions:
   _PROJECT_ID: 'secure-petal-453506-r1'
   _REGION: 'us-central1'
   _REPO_NAME: 'test-repo'
-  _IMAGE_NAME: 'common-api'
+  _IMAGE_NAME: 'common-api1'
   _TAG: 'latest'
   _SERVICE_NAME: 'test-service'
 
