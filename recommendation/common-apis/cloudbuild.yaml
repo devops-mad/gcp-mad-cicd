@@ -1,13 +1,10 @@
 steps:
-  - name: 'alpine'
-    args: ['sh', '-c', 'ls -R /workspace']
-
   - name: 'gcr.io/cloud-builders/docker'
     args: [
       'build',
-      '-f', 'recommendation/common-api/Dockerfile',  # Correct path to the Dockerfile
+      '-f', 'recommendation/common-apis/Dockerfile',
       '-t', '${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPO_NAME}/${_IMAGE_NAME}:${_TAG}',
-      '.'  # Use current directory as the build context
+      'recommendation/common-apis'
     ]
 
   - name: 'gcr.io/cloud-builders/docker'
