@@ -4,7 +4,7 @@ steps:
       'build',
       '-f', 'recommendation/common-api/Dockerfile',
       '-t', '${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPO_NAME}/${_IMAGE_NAME}:${_TAG}',
-      'recommendation/common-api'
+      'recommendation/common-api/'
     ]
 
   - name: 'gcr.io/cloud-builders/docker'
