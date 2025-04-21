@@ -2,9 +2,9 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     args: [
       'build',
-      '-f', 'recommendation/common-api/Dockerfile',
+      '-f', 'recommendation/common-api/Dockerfile',  # Correct the path here
       '-t', '${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPO_NAME}/${_IMAGE_NAME}:${_TAG}',
-      'workspace/recommendation/common-api/'
+      'recommendation/common-api'  # This should be the context directory for Docker build
     ]
 
   - name: 'gcr.io/cloud-builders/docker'
