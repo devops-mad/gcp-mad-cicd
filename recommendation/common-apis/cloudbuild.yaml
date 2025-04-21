@@ -1,6 +1,6 @@
 steps:
 - name: 'gcr.io/cloud-builders/docker'
-  args: [ 'build', '-f', 'recommendation/common-api/Dockerfile', '-t', '${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPO_NAME}/${_IMAGE_NAME}:${_TAG}', '.' ]
+  args: [ 'build', '-f', 'recommendation/common-api/Dockerfile', '-t', '${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPO_NAME}/${_IMAGE_NAME}:${_TAG}', 'recommendation/common-api' ]
 
 - name: 'gcr.io/cloud-builders/docker'
   args: [ 'push', '${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPO_NAME}/${_IMAGE_NAME}:${_TAG}' ]
@@ -12,12 +12,10 @@ substitutions:
   _PROJECT_ID: 'secure-petal-453506-r1'
   _REGION: 'us-central1'
   _REPO_NAME: 'test-repo'
-  _IMAGE_NAME: 'common-api1'
+  _IMAGE_NAME: 'common-api'
   _TAG: 'latest'
   _SERVICE_NAME: 'test-service'
 
-images:
-- '${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPO_NAME}/${_IMAGE_NAME}:${_TAG}'
 
 options:
   defaultLogsBucketBehavior: REGIONAL_USER_OWNED_BUCKET
