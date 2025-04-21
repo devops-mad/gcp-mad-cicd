@@ -1,0 +1,23 @@
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  args: [ 'build', '-t', '${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPO_NAME}/${_IMAGE_NAME}:${_TAG}', '.' ]
+
+- name: 'gcr.io/cloud-builders/docker'
+  args: [ 'push', '${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPO_NAME}/${_IMAGE_NAME}:${_TAG}' ]
+
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  args: [ 'run', 'deploy', '${_SERVICE_NAME}', '--image', '${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPO_NAME}/${_IMAGE_NAME}:${_TAG}', '--region', '${_REGION}', '--platform', 'managed', '--allow-unauthenticated' ]
+
+substitutions:
+  _PROJECT_ID: 'secure-petal-453506-r1'
+  _REGION: 'us-central1'
+  _REPO_NAME: 'test-repo'
+  _IMAGE_NAME: 'common-api'
+  _TAG: 'latest'
+  _SERVICE_NAME: 'test-service'
+
+images:
+- '${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPO_NAME}/${_IMAGE_NAME}:${_TAG}'
+
+options:
+  defaultLogsBucketBehavior: REGIONAL_USER_OWNED_BUCKET
