@@ -15,14 +15,19 @@ steps:
 
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     entrypoint: gcloud
-    args: ['run', 'deploy', '_SERVICE_NAME', '--image', '${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPO_NAME}/${_IMAGE_NAME}:${_TAG}', '--region', '_REGION']
-
+    args: [
+      'run', 'deploy', '${_SERVICE_NAME}',
+      '--image', '${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPO_NAME}/${_IMAGE_NAME}:${_TAG}',
+      '--region', '${_REGION}',
+      '--platform', 'managed',
+      '--allow-unauthenticated'
+    ]
 
 substitutions:
   _PROJECT_ID: 'secure-petal-453506-r1'
   _REGION: 'us-central1'
   _REPO_NAME: 'test-repo'
-  _IMAGE_NAME: 'common-api1'
+  _IMAGE_NAME: 'common-api3'
   _TAG: 'latest'
   _SERVICE_NAME: 'test-service'
 
