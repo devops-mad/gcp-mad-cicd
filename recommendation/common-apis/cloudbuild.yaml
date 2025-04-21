@@ -3,18 +3,27 @@ steps:
     args:
       [
         'build',
-        '-f', 'recommendation/common-api/Dockerfile',      # Specify Dockerfile location
+        '-f', 'recommendation/common-api/Dockerfile',
         '-t', '${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPO_NAME}/${_IMAGE_NAME}:${_TAG}',
-        'recommendation/common-api'                         # Set correct build context
+        'recommendation/common-api'
       ]
 
-
   - name: 'gcr.io/cloud-builders/docker'
-    args: [ 'push', '${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPO_NAME}/${_IMAGE_NAME}:${_TAG}' ]
+    args:
+      [
+        'push',
+        '${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPO_NAME}/${_IMAGE_NAME}:${_TAG}'
+      ]
 
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-    args: [ 'run', 'deploy', '${_SERVICE_NAME}', '--image', '${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPO_NAME}/${_IMAGE_NAME}:${_TAG}', '--region', '${_REGION}', '--platform', 'managed', '--allow-unauthenticated' ]
-
+    args:
+      [
+        'run', 'deploy', '${_SERVICE_NAME}',
+        '--image', '${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_REPO_NAME}/${_IMAGE_NAME}:${_TAG}',
+        '--region', '${_REGION}',
+        '--platform', 'managed',
+        '--allow-unauthenticated'
+      ]
 substitutions:
   _PROJECT_ID: 'secure-petal-453506-r1'
   _REGION: 'us-central1'
